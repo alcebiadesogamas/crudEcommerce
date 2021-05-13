@@ -3,20 +3,17 @@ module.exports = {
     id: {
       type: Sequelize.INTEGER,
       allowNull: false,
-      autoincrement: true,
+      autoIncrement: true,
       primaryKey: true,
     },
-    name: {
-      type: Sequelize.STRING,
+    idUsuario: {
+      type: Sequelize.INTEGER,
       allowNull: false,
-    },
-    email: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
+      references: {
+        model: 'usuarios',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
     },
     created_at: {
       type: Sequelize.DATE,
