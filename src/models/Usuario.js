@@ -18,6 +18,9 @@ export default class Usuario extends Model {
         email: {
           type: Sequelize.STRING,
           defaultValue: '',
+          unique: {
+            msg: 'Email já está cadastrado',
+          },
           validate: {
             isEmail: {
               msg: 'Email inválido!',
@@ -29,7 +32,7 @@ export default class Usuario extends Model {
           defaultValue: '',
         },
         password: {
-          type: Sequelize.STRING,
+          type: Sequelize.VIRTUAL,
           defaultValue: '',
           validate: {
             len: {
