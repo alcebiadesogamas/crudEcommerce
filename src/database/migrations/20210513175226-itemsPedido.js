@@ -19,15 +19,6 @@ module.exports = {
           key: 'id',
         },
       },
-      idCliente: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'pedidos',
-          key: 'idCliente',
-        },
-      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

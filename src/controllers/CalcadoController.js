@@ -1,12 +1,13 @@
-import Usuario from '../models/Usuario';
+import Calcado from '../models/Calcado';
 
-class UsuarioController {
+class CalcadoController {
   //  Create
   async store(req, res) {
     try {
-      const novoUsuario = await Usuario.create(req.body);
-      return res.json(novoUsuario);
+      const novoCalcado = await Calcado.create(req.body);
+      return res.json(novoCalcado);
     } catch (e) {
+      console.log(e);
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
       });
@@ -16,8 +17,8 @@ class UsuarioController {
   //  Read
   async index(req, res) {
     try {
-      const usuarios = await Usuario.findAll();
-      return res.json(usuarios);
+      const calcados = await Calcado.findAll();
+      return res.json(calcados);
     } catch (e) {
       return res.json(null);
     }
@@ -26,8 +27,8 @@ class UsuarioController {
   //  Show
   async show(req, res) {
     try {
-      const usuario = await Usuario.findByPk(req.params.id);
-      return res.json(usuario);
+      const calcado = await Calcado.findByPk(req.params.id);
+      return res.json(calcado);
     } catch (e) {
       return res.json(null);
     }
@@ -42,15 +43,15 @@ class UsuarioController {
         });
       }
 
-      const usuario = await Usuario.findByPk(req.params.id);
+      const calcado = await Calcado.findByPk(req.params.id);
 
-      if (!usuario) {
+      if (!calcado) {
         return res.status(400).json({
-          errors: ['Usuario não existe!'],
+          errors: ['Calcado não existe!'],
         });
       }
 
-      const novosDados = await usuario.update(req.body);
+      const novosDados = await calcado.update(req.body);
 
       return res.json(novosDados);
     } catch (e) {
@@ -69,17 +70,17 @@ class UsuarioController {
         });
       }
 
-      const usuario = await Usuario.findByPk(req.params.id); // busca o usuario na base de dados
+      const calcado = await Calcado.findByPk(req.params.id); // busca o calcado na base de dados
 
-      if (!usuario) {
+      if (!calcado) {
         return res.status(400).json({
-          errors: ['Usuario não existe!'],
+          errors: ['Calcado não existe!'],
         });
       }
 
-      await usuario.destroy();
+      await calcado.destroy(); // deleta o calcado
 
-      return res.json(usuario);
+      return res.json(calcado);
     } catch (e) {
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
@@ -88,4 +89,4 @@ class UsuarioController {
   }
 }
 
-export default new UsuarioController();
+export default new CalcadoController();
