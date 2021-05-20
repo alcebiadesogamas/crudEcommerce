@@ -1,11 +1,11 @@
 import Usuario from '../models/Usuario';
 
 class UsuarioController {
-  async index(req, res) {
+  async store(req, res) {
     const novoUsuario = await Usuario.create({
       name: 'junior',
       email: 'junior@gmail.com',
-      password: 'senha',
+      password: '123456',
     });
     res.json(novoUsuario);
   }
