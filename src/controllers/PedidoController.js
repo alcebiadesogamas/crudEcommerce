@@ -1,39 +1,40 @@
-import Calcado from '../models/Calcado';
+import Pedido from '../models/Pedido';
 
-class CalcadoController {
-  //  Create
+class PedidoController {
+  // create
   async store(req, res) {
     try {
-      const novoCalcado = await Calcado.create(req.body);
-      return res.json(novoCalcado);
+      const novoPedido = await Pedido.create(req.body);
+      return res.json(novoPedido);
     } catch (e) {
+      console.log(e);
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
       });
     }
   }
 
-  //  Read
+  // Read or List
   async index(req, res) {
     try {
-      const calcados = await Calcado.findAll();
-      return res.json(calcados);
+      const pedidos = await Pedido.findAll();
+      return res.json(pedidos);
     } catch (e) {
       return res.json(null);
     }
   }
 
-  //  Show
+  // Show or List one
   async show(req, res) {
     try {
-      const calcado = await Calcado.findByPk(req.params.id);
-      return res.json(calcado);
+      const pedido = await Pedido.findByPk(req.params.id);
+      return res.json(pedido);
     } catch (e) {
       return res.json(null);
     }
   }
 
-  // update
+  // Update
   async update(req, res) {
     try {
       if (!req.params.id) {
@@ -42,15 +43,15 @@ class CalcadoController {
         });
       }
 
-      const calcado = await Calcado.findByPk(req.params.id);
+      const pedido = await Pedido.findByPk(req.params.id);
 
-      if (!calcado) {
+      if (!pedido) {
         return res.status(400).json({
-          errors: ['Calcado não existe!'],
+          errors: ['Pedido não existe!'],
         });
       }
 
-      const novosDados = await calcado.update(req.body);
+      const novosDados = await pedido.update(req.body);
 
       return res.json(novosDados);
     } catch (e) {
@@ -61,25 +62,25 @@ class CalcadoController {
   }
 
   // Delete
+
   async delete(req, res) {
     try {
       if (!req.params.id) {
         return res.status(400).json({
-          errors: ['ID não enviado.'],
+          errors: ['ID não enviado'],
         });
       }
 
-      const calcado = await Calcado.findByPk(req.params.id); // busca o calcado na base de dados
+      const pedido = await Pedido.findByPk(req.params.id);
 
-      if (!calcado) {
+      if (!pedido) {
         return res.status(400).json({
-          errors: ['Calcado não existe!'],
+          errors: ['Pedido não exite!'],
         });
       }
 
-      await calcado.destroy(); // deleta o calcado
-
-      return res.json(calcado);
+      await pedido.destroy();
+      return res.json(pedido);
     } catch (e) {
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
@@ -88,4 +89,4 @@ class CalcadoController {
   }
 }
 
-export default new CalcadoController();
+export default new PedidoController();

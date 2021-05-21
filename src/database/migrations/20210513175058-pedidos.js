@@ -15,10 +15,12 @@ module.exports = {
         },
         onDelete: 'CASCADE',
         allowNull: false,
+        field: 'id_usuario',
       },
       valorTotal: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        field: 'valor_total',
       },
       created_at: {
         type: Sequelize.DATE,

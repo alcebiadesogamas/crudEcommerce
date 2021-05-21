@@ -9,6 +9,7 @@ module.exports = {
           model: 'pedidos',
           key: 'id',
         },
+        field: 'id_pedido',
       },
       idCalcado: {
         type: Sequelize.INTEGER,
@@ -18,6 +19,7 @@ module.exports = {
           model: 'calcados',
           key: 'id',
         },
+        field: 'id_calcado',
       },
       created_at: {
         type: Sequelize.DATE,
