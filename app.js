@@ -10,6 +10,7 @@ import usuarioRoutes from './src/routes/usuarioRouter';
 import calcadoRoutes from './src/routes/calcadoRouter';
 import pedidoRoutes from './src/routes/pedidoRouter';
 import itemsPedidoRoutes from './src/routes/itemsPedidoRouter';
+import tokenRouter from './src/routes/tokenRouter';
 
 class App {
   constructor() {
@@ -29,6 +30,7 @@ class App {
     this.app.use('/calcados/', calcadoRoutes);
     this.app.use('/pedidos/', pedidoRoutes);
     this.app.use('/itemPedido', itemsPedidoRoutes);
+    this.app.use('/tokens', tokenRouter);
   }
 }
 

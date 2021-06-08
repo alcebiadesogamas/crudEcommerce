@@ -48,11 +48,17 @@ export default class Usuario extends Model {
     );
 
     this.addHook('beforeSave', async (user) => {
-      if (Usuario.password) {
+      if (user.password) {
         user.password_hash = await bcryptjs.hash(user.password, 8);
+      } else {
+        console.log('Senha Vazia');
       }
     });
 
     return this;
+  }
+
+  passwordIsValid(password) {
+    return bcryptjs.compare(password, this.password_hash);
   }
 }
