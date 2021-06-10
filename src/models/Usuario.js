@@ -41,6 +41,10 @@ export default class Usuario extends Model {
             },
           },
         },
+        admin: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: false,
+        },
       },
       {
         sequelize,
