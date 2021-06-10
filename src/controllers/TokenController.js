@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import Usuario from '../models/Usuario';
 
 class TokenController {
-  async store(req, res) {
+  async create(req, res) {
     const { email = '', password = '' } = req.body;
     if (!email || !password) {
       return res.status(401).json({

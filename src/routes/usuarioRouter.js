@@ -6,8 +6,8 @@ const router = new Router();
 
 router.post('/', usuarioController.store); // create a user
 router.get('/', loginRequired, usuarioController.index);// list users
-router.get('/:id', usuarioController.show);
-router.put('/:id', usuarioController.update);
-router.delete('/:id', usuarioController.delete);
+router.get('/:id', loginRequired, usuarioController.show);
+router.put('/', loginRequired, usuarioController.update);
+router.delete('/', loginRequired, usuarioController.delete);
 
 export default router;

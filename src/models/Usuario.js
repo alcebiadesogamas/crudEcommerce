@@ -65,4 +65,8 @@ export default class Usuario extends Model {
   passwordIsValid(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
+
+  isAdmin() {
+    return this.admin;
+  }
 }

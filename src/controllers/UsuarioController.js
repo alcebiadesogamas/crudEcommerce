@@ -16,8 +16,14 @@ class UsuarioController {
   //  Read
   async index(req, res) {
     try {
-      const usuarios = await Usuario.findAll();
-      return res.json(usuarios);
+      const loggedUser = await Usuario.findByPk(req.userId);
+      if (loggedUser.isAdmin()) {
+        const usuarios = await Usuario.findAll({ attributes: ['id', 'name', 'email'] });
+        return res.json(usuarios);
+      }
+      return res.status(400).json({
+        errors: ['Permissão negada: must be admin'],
+      });
     } catch (e) {
       return res.json(null);
     }
@@ -26,8 +32,15 @@ class UsuarioController {
   //  Show
   async show(req, res) {
     try {
-      const usuario = await Usuario.findByPk(req.params.id);
-      return res.json(usuario);
+      const loggedUser = await Usuario.findByPk(req.userId);
+      if (loggedUser.isAdmin()) {
+        const usuario = await Usuario.findByPk(req.params.id);
+        const { id, name, email } = usuario;
+        return res.json({ id, name, email });
+      }
+      return res.status(400).json({
+        errors: ['Permissão negada: must be admin'],
+      });
     } catch (e) {
       return res.json(null);
     }
@@ -36,13 +49,7 @@ class UsuarioController {
   // update
   async update(req, res) {
     try {
-      if (!req.params.id) {
-        return res.status(400).json({
-          errors: ['ID não enviado.'],
-        });
-      }
-
-      const usuario = await Usuario.findByPk(req.params.id);
+      const usuario = await Usuario.findByPk(req.userId);
 
       if (!usuario) {
         return res.status(400).json({
@@ -63,13 +70,13 @@ class UsuarioController {
   // Delete
   async delete(req, res) {
     try {
-      if (!req.params.id) {
+      if (!req.userId) {
         return res.status(400).json({
           errors: ['ID não enviado.'],
         });
       }
 
-      const usuario = await Usuario.findByPk(req.params.id); // busca o usuario na base de dados
+      const usuario = await Usuario.findByPk(req.userId); // busca o usuario na base de dados
 
       if (!usuario) {
         return res.status(400).json({
