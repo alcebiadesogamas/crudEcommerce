@@ -21,8 +21,8 @@ class UsuarioController {
         const usuarios = await Usuario.findAll({ attributes: ['id', 'name', 'email'] });
         return res.json(usuarios);
       }
-      return res.status(400).json({
-        errors: ['Permissão negada: must be admin'],
+      return res.status(401).json({
+        errors: ['Permissão negada'],
       });
     } catch (e) {
       return res.json(null);
@@ -38,8 +38,8 @@ class UsuarioController {
         const { id, name, email } = usuario;
         return res.json({ id, name, email });
       }
-      return res.status(400).json({
-        errors: ['Permissão negada: must be admin'],
+      return res.status(401).json({
+        errors: ['Permissão negada'],
       });
     } catch (e) {
       return res.json(null);
