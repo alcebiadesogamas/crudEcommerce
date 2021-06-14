@@ -32,15 +32,9 @@ class UsuarioController {
   //  Show
   async show(req, res) {
     try {
-      const loggedUser = await Usuario.findByPk(req.userId);
-      if (loggedUser.isAdmin()) {
-        const usuario = await Usuario.findByPk(req.params.id);
-        const { id, name, email } = usuario;
-        return res.json({ id, name, email });
-      }
-      return res.status(401).json({
-        errors: ['Permissão negada'],
-      });
+      const usuario = await Usuario.findByPk(req.params.id);
+      const { id, name, email } = usuario;
+      return res.json({ id, name, email });
     } catch (e) {
       return res.json(null);
     }

@@ -13,9 +13,10 @@ export default (req, res, next) => {
 
   try {
     const dados = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { id, email } = dados;
+    const { id, email, admin } = dados;
     req.userId = id;
     req.userEmail = email;
+    req.admin = admin;
 
     return next();
   } catch (e) {

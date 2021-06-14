@@ -23,8 +23,8 @@ class TokenController {
         errors: ['Senha incorreta'],
       });
     }
-    const { id } = usuario;
-    const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
+    const { id, admin } = usuario;
+    const token = jwt.sign({ id, email, admin }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 
